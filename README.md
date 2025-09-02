@@ -5,6 +5,7 @@ This Terraform project creates a complete AWS VPC infrastructure with NAT Gatewa
 ## 🏗️ Architecture Overview
 
 The infrastructure consists of:
+
 - **VPC** with DNS support (172.16.0.0/20)
 - **Public Subnet** (172.16.0.0/21) in us-east-2a
 - **Private Subnet** (172.16.8.0/21) in us-east-2b
@@ -23,22 +24,26 @@ The infrastructure consists of:
 ## 🚀 Quick Start
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd "VPC with NAT"
    ```
 
 2. **Initialize Terraform**
+
    ```bash
    terraform init
    ```
 
 3. **Review the plan**
+
    ```bash
    terraform plan
    ```
 
 4. **Apply the configuration**
+
    ```bash
    terraform apply
    ```
@@ -75,14 +80,14 @@ The infrastructure consists of:
 
 Key variables that can be customized in `variables.tf`:
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `vpc_cidr` | 172.16.0.0/20 | VPC CIDR block |
-| `public_cidr` | 172.16.0.0/21 | Public subnet CIDR |
-| `private_cidr` | 172.16.8.0/21 | Private subnet CIDR |
-| `windows_ami` | ami-05b00365623a86bd3 | Windows Server AMI |
-| `linux_ami` | ami-0bb7d855677353076 | Linux AMI |
-| `instance_type_t3micro` | t3.micro | EC2 instance type |
+| Variable                | Default               | Description         |
+| ----------------------- | --------------------- | ------------------- |
+| `vpc_cidr`              | 172.16.0.0/20         | VPC CIDR block      |
+| `public_cidr`           | 172.16.0.0/21         | Public subnet CIDR  |
+| `private_cidr`          | 172.16.8.0/21         | Private subnet CIDR |
+| `windows_ami`           | ami-05b00365623a86bd3 | Windows Server AMI  |
+| `linux_ami`             | ami-0bb7d855677353076 | Linux AMI           |
+| `instance_type_t3micro` | t3.micro              | EC2 instance type   |
 
 ### Region Configuration
 
@@ -114,12 +119,14 @@ After deployment, the following information will be available:
 ## 🔑 Access Instructions
 
 ### Windows Instance
+
 1. Use the auto-generated RDP file: `Vinay_Win[timestamp].rdp`
 2. Or manually connect to the Elastic IP using RDP
 3. Username: `Administrator`
 4. Password: Check `vinay_decrypt_password.txt`
 
 ### Linux Instance
+
 1. SSH to Windows instance first (bastion host)
 2. From Windows, SSH to Linux instance using the private IP
 3. Use the generated private key file
@@ -137,6 +144,7 @@ terraform destroy
 ## 📝 Generated Files
 
 The following files are automatically generated (excluded from Git):
+
 - `*.pem` - SSH private/public key files
 - `*.rdp` - RDP connection files
 - `*password*.txt` - Decrypted Windows passwords
@@ -177,6 +185,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ### Support
 
 For issues and questions:
+
 1. Check the Terraform logs: `terraform apply -debug`
 2. Review AWS CloudTrail for API call details
 3. Validate your AWS credentials and permissions
