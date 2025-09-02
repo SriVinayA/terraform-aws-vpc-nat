@@ -1,0 +1,22 @@
+digraph G {
+  rankdir = "RL";
+  node [shape = rect, fontname = "sans-serif"];
+  "aws_default_route_table.private_rt" [label="aws_default_route_table.private_rt"];
+  "aws_eip.nat_eip" [label="aws_eip.nat_eip"];
+  "aws_internet_gateway.igw" [label="aws_internet_gateway.igw"];
+  "aws_nat_gateway.nat_gw" [label="aws_nat_gateway.nat_gw"];
+  "aws_route_table.public_rt" [label="aws_route_table.public_rt"];
+  "aws_route_table_association.public_rt_assoc" [label="aws_route_table_association.public_rt_assoc"];
+  "aws_subnet.private_subnet" [label="aws_subnet.private_subnet"];
+  "aws_subnet.public_subnet" [label="aws_subnet.public_subnet"];
+  "aws_vpc.vpc-01" [label="aws_vpc.vpc-01"];
+  "aws_default_route_table.private_rt" -> "aws_nat_gateway.nat_gw";
+  "aws_internet_gateway.igw" -> "aws_vpc.vpc-01";
+  "aws_nat_gateway.nat_gw" -> "aws_eip.nat_eip";
+  "aws_nat_gateway.nat_gw" -> "aws_subnet.public_subnet";
+  "aws_route_table.public_rt" -> "aws_internet_gateway.igw";
+  "aws_route_table_association.public_rt_assoc" -> "aws_route_table.public_rt";
+  "aws_route_table_association.public_rt_assoc" -> "aws_subnet.public_subnet";
+  "aws_subnet.private_subnet" -> "aws_vpc.vpc-01";
+  "aws_subnet.public_subnet" -> "aws_vpc.vpc-01";
+}
