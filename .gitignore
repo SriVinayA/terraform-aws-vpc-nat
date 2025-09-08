@@ -44,8 +44,8 @@ terraform.rc
 *password*.txt
 *decrypt*.txt
 
-# Ignore terraform lock file for cross-platform compatibility
-.terraform.lock.hcl
+# Keep terraform lock file for provider version consistency
+# .terraform.lock.hcl should be committed to ensure same provider versions
 
 # Ignore backup files
 *.backup
