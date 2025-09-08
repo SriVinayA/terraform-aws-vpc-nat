@@ -39,31 +39,13 @@ resource "aws_network_acl" "public_nacl" {
     cidr_block = var.all_ipv4_cidr
   }
 
+  # Allow all outbound traffic
   egress {
     rule_no    = 100
     action     = "allow"
-    protocol   = "tcp"
-    from_port  = 80
-    to_port    = 80
-    cidr_block = var.all_ipv4_cidr
-  }
-
-  egress {
-    rule_no    = 200
-    action     = "allow"
-    protocol   = "tcp"
-    from_port  = 443
-    to_port    = 443
-    cidr_block = var.all_ipv4_cidr
-  }
-
-  # Allow all outbound ephemeral ports for return traffic
-  egress {
-    rule_no    = 300
-    action     = "allow"
-    protocol   = "tcp"
-    from_port  = 1024
-    to_port    = 65535
+    protocol   = "-1"
+    from_port  = 0
+    to_port    = 0
     cidr_block = var.all_ipv4_cidr
   }
 
@@ -85,12 +67,13 @@ resource "aws_network_acl" "private_nacl" {
     cidr_block = "${local.home_ip}/32"
   }
 
+  # Allow all outbound traffic
   egress {
     rule_no    = 100
     action     = "allow"
-    protocol   = "tcp"
-    from_port  = 80
-    to_port    = 80
+    protocol   = "-1"
+    from_port  = 0
+    to_port    = 0
     cidr_block = var.all_ipv4_cidr
   }
 }
